@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const authConfig = require("../config/auth");
 
 const User = mongoose.model("User");
+
+function tokenGenerator(params) {
+  return jwt.sign(params, authConfig.secret, { expiresIn: 86400 });
+}
 
 module.exports = {
   async store(request, response) {
@@ -17,7 +23,10 @@ module.exports = {
 
       user.password = undefined;
 
-      return response.json(user);
+      return response.json({
+        user,
+        token: tokenGenerator({ user, id: user.id }),
+      });
     } catch (error) {
       return response.status(400).send({ error: "Registration failed" });
     }
@@ -35,6 +44,8 @@ module.exports = {
       return response.status(400).send({ error: "Invalid password" });
     }
 
-    response.json(user);
+    user.password = undefined;
+
+    response.json({ user, token: tokenGenerator({ user, id: user.id }) });
   },
 };
