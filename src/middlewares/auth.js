@@ -10,7 +10,7 @@ module.exports = (request, response, next) => {
   const parts = authHeader.split(" ");
 
   if (!parts.length === 2) {
-    return res.status(401).send({ error: "Invalid Authorization" });
+    return response.status(401).send({ error: "Invalid Authorization" });
   }
 
   const [scheme, token] = parts;
@@ -22,6 +22,7 @@ module.exports = (request, response, next) => {
     if (error) return response.status(401).send({ error: "Token invalid" });
 
     request.userId = decoded.id;
+    request.isAdmin = decoded.user.administrator;
     return next();
   });
 };

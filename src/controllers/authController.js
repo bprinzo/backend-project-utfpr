@@ -46,6 +46,28 @@ module.exports = {
 
     user.password = undefined;
 
-    response.json({ user, token: tokenGenerator({ user, id: user.id }) });
+    response.json({
+      user,
+      token: tokenGenerator({
+        user,
+        id: user.id,
+        administrator: user.administrator,
+      }),
+    });
+  },
+
+  async find(request, response) {
+    const user = await User.find();
+    return response.send(user);
+  },
+
+  async findByUsername(request, response) {
+    const user = await User.findOne({
+      username: request.params.username,
+    });
+    if (!user) {
+      response.status(400).send({ error: "User not found" });
+    }
+    return response.send(user);
   },
 };
