@@ -1,11 +1,11 @@
 # Backend Register and Post Uploader
 
-This is an API restful powered by Node.JS, Express and MongoDB, that provides register functions such as first and last name, email, username and password furthermore it 
-provides the capability of upload posts with title, text and images.
+This is an API restful powered by Node.JS, Express and MongoDB, that provides register functions such as first and last name, email, username and password furthermore it provides the capability of upload posts with title, text and images, under login authorization.
  
 ## Features
 
 * Register of Users
+* Login Authorization
 * Searches by all users or individual
 * Creation of posts with title, text and images
 * Search for posts by their titles and for all of them
@@ -59,3 +59,42 @@ yarn
 yarn dev
 ```
 
+## Usage
+
+**Example using insomnia**
+ 
+### Register
+
+![Register](/SampleImages/register.png)
+
+### Find All Users
+
+![UsersfindAll](/SampleImages/UsersfindAll.png)
+
+### Find User By Username
+
+![UserFindByUsername](/SampleImages/UserFindByUsername.png)
+
+### Login Authorization
+
+![LoginAuth](/SampleImages/LoginAuth.png)
+
+### Create Upload
+
+![UploadCreate](/SampleImages/UploadCreate.png)
+
+### Find All Upload
+
+![PostFindAll](/SampleImages/PostFindAll.png)
+
+### Find Post By Title
+
+![PostFindByTitle](/SampleImages/PostFindByTitle.png)
+
+
+#### Observation:
+
+The login authorization is made by a token pass on the header of the requisition.
+
+## License
+Distributed under the MIT License. See ```LICENSE``` for more information.
