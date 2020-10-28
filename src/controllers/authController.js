@@ -45,7 +45,6 @@ module.exports = {
     }
 
     user.password = undefined;
-
     response.json({
       user,
       token: tokenGenerator({
@@ -63,7 +62,7 @@ module.exports = {
 
   async findByUsername(request, response) {
     const user = await User.findOne({
-      username: request.params.username,
+      username: { $regex: request.params.username },
     });
     if (!user) {
       response.status(400).send({ error: "User not found" });
